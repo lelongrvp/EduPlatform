@@ -1,11 +1,17 @@
-import './App.css'
+import { useState } from "react";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import Content from "./Content";
 
-const App = () => {
-  return (
+export default function App() {
+  const [isLogin, checkIsLogin] = useState(false);
+  const [hasAccount, checkHasAccount] = useState(true);
+  console.log(isLogin);
+  return(
     <>
-      <div>Edu Platform</div>
+      {hasAccount && !isLogin && <Login {...{checkHasAccount, checkIsLogin}}/>}
+      {!hasAccount && !isLogin && <SignUp {...{checkHasAccount}}/>}
+      {isLogin && <Content/>}
     </>
   )
 }
-
-export default App
