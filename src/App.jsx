@@ -5,6 +5,7 @@ const App = () => {
     <>
       <div>Edu Platform</div>
       <p>Content goes here...</p>
+      <p>Content goes here...</p>
     </>
   )
 }
