@@ -13,9 +13,9 @@ function handleClick(event) { //note that function and link was not definde
 export default function Teacher({courses}) {
   return (
     <div id="teacher">
-      <Typography variant='h4' style={{fontWeight:"bold"}}>Giảng viên</Typography>
+      <Typography variant='h5' style={{fontWeight:"bold"}}>Giảng viên</Typography>
       <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick} style={{marginLeft:10, color:"#c0c4fc", textDecoration:"underline"}}>
-      <Typography variant='h5' style={{fontWeight:"bold"}}>{courses.teacher.name}</Typography>
+      <Typography variant='h6' style={{fontWeight:"bold"}}>{courses.teacher.name}</Typography>
       </Link>
       
       <Typography variant='h6'>{courses.teacher.role}</Typography>
@@ -25,22 +25,22 @@ export default function Teacher({courses}) {
           <Avatar src={courses.teacher.avatar} sx={{ width: 100, height: 100 }}/>
         </Grid>
         <Grid xs={10}>
-          <p>
+          <div>
             <MdStarRate/>
             <Typography variant='subtitle1' style={{display:"inline", marginLeft:10}}>{courses.teacher.totalRateStar} xếp hạng giảng viên</Typography>        
-          </p>
-          <p>
+          </div>
+          <div>
             <MdVerified/>
             <Typography variant='subtitle1' style={{display:"inline", marginLeft:10}}>{courses.teacher.totalRate} đánh giá</Typography>        
-          </p>
-          <p>
+          </div>
+          <div>
             <MdSupervisorAccount/>
             <Typography variant='subtitle1' style={{display:"inline", marginLeft:10}}>{courses.teacher.totalStudents} học viên</Typography>        
-          </p>
-          <p>
+          </div>
+          <div>
             <MdPlayCircle/>
             <Typography variant='subtitle1' style={{display:"inline", marginLeft:10}}>{courses.teacher.totalCourses} khóa học</Typography>        
-          </p>
+          </div>
         </Grid>
       </Grid>
       </Box>
@@ -51,7 +51,7 @@ export default function Teacher({courses}) {
         return (<Typography variant='subtitle2' style={{marginLeft:20}} key={index}>- {c}</Typography>)
       })}
       <Typography variant='subtitle1'>{courses.teacher.ability}</Typography>        
-
+      
     </div>
   )
 }

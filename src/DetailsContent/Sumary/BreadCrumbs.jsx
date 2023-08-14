@@ -33,7 +33,7 @@ export default function BreadCrumbs() {
       <Stack spacing={2}>
         <Breadcrumbs
           separator={<MdKeyboardArrowRight fontSize="small" color="white" />}
-          aria-label="breadcrumb" color="#c0c4fc"
+          aria-label="breadcrumb" color="white"
         >
           {breadcrumbs}
         </Breadcrumbs>

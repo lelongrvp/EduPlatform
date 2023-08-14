@@ -4,7 +4,6 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import { MdOutlineCheck } from "react-icons/md";
 export default function Objectives({courses}) {
-  console.log(courses.objectives);
   return (
     <div style={{border:"1px solid black", padding:"10px", margin:"20px"}}>
       <Typography variant='h5' style={{fontWeight:"bold", padding:"10px"}}>Những gì bạn sẽ học</Typography>

@@ -8,6 +8,7 @@ import Requirements from './Requirement/Requirements';
 import Description from './Description/Description';
 import Teacher from './Teacher/Teacher';
 import Rating from './Rating/Rating';
+import Payment from './Payment/Payment';
 export default function DetailsContent({showFullDetails}) {
   const courses = {
     name : "AWS Cloud for beginner (Vietnamese)",
@@ -41,10 +42,11 @@ export default function DetailsContent({showFullDetails}) {
       contact: "Các bạn có thể sử dụng tính năng comment của Udemy, mình sẽ thường xuyên check và trả lời các comment cũng như update video khi bị outdate. Ngoài ra mình cũng có một group riêng hỗ trợ technical cho các bạn có mua khóa học của mình trong suốt quá trình học tập, check inbox của mình để được invite vào nhé.",
 
     },
+    price: '279,000 vnd',
     createAt: "05/12/2001",
     updateAt: "29/08/2023",
     language: "Vietnamese",
-    rate : 3.6,
+    rate : 4.8,
     rateTime : 133,
     review : "link to review",
     totalStudent: 400,
@@ -96,21 +98,30 @@ export default function DetailsContent({showFullDetails}) {
         "Thân ái - Linh Nguyễn."
       ],
       contactTeacher: "----Liên lạc với giảng viên----",
-    }
+    },
+    videos:[
+      "https://www.youtube.com/embed/a9__D53WsUs",
+      "https://www.youtube.com/embed/PZxAkzpuxT8",
+      "https://www.youtube.com/embed/fgbdtNNXR0U"
+    ],
+
   }
   return (
     <>
-      <navbarhere>Here is nav bar an notification!</navbarhere>
+      <div>Here is nav bar an notification!</div>
       <Button size="small" onClick={()=>{showFullDetails(false)}}>Back</Button>
-      <Sumary {...{courses}}/>
-      <div style={{padding: "20px 600px 20px 200px"}}>
-        <Objectives {...{courses}}/>
-        <Contents {...{courses}}/>
-        <Requirements {...{courses}}/>
-        <Description {...{courses}}/>
-        <Target {...{courses}}/>
-        <Teacher {...{courses}}/>
-        <Rating/>
+      <div className='contents' style={{position:'relative'}}>
+        <Sumary {...{courses}}/>
+        <Payment {...{courses}}/>
+        <div style={{padding: "20px 600px 20px 200px",}}>
+          <Objectives {...{courses}}/>
+          <Contents {...{courses}}/>
+          <Requirements {...{courses}}/>
+          <Description {...{courses}}/>
+          <Target {...{courses}}/>
+          <Teacher {...{courses}}/>
+          <Rating {...{courses}}/>
+        </div>
       </div>
     </>
   );
