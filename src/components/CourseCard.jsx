@@ -7,6 +7,7 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const CourseCard = (props) => {
   return (
@@ -14,9 +15,9 @@ const CourseCard = (props) => {
       sx={{ maxWidth: 345 }}
       style={{
         margin: "20px",
-        background: "#e5e5e5",
         padding: 10,
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+        height: "350px",
       }}
     >
       <CardMedia
@@ -33,7 +34,15 @@ const CourseCard = (props) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">View more</Button>
+        <Link
+          to={{
+            pathname: `/course/${props.course.id}`,
+            state: { courses: props.courseArray },
+          }}
+          style={{ textDecoration: "none" }}
+        >
+          <Button size="small">View more</Button>
+        </Link>
       </CardActions>
     </Card>
   );

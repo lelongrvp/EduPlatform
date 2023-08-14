@@ -1,5 +1,4 @@
 import { useState } from "react";
-import CategoryBar from "../components/CategoryBar";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import CourseCard from "../components/CourseCard";
@@ -64,13 +63,14 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <CategoryBar />
       <Container
         maxWidth="x1"
         sx={{ mt: 2 }}
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         {showMore
@@ -82,9 +82,7 @@ const Home = () => {
               .map((course, idx) => <CourseCard key={idx} course={course} />)}
       </Container>
       {showMore ? (
-        <Button onClick={handleShowMore} style={{ left: "50%" }}>
-          Show Less
-        </Button>
+        <Button onClick={handleShowMore}>Show Less</Button>
       ) : (
         <Button onClick={handleShowMore}>Show More</Button>
       )}

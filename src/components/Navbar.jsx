@@ -1,16 +1,20 @@
 import {
   AppBar,
-  Button,
   Container,
   IconButton,
-  InputBase,
   ThemeProvider,
   Toolbar,
   Typography,
   createTheme,
 } from "@mui/material";
-import { BsYinYang } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { BsYinYang, BsCart } from "react-icons/bs";
+import { AiOutlineHeart } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
+import DropdownMenu from "./DropdownMenu";
+import SearchBar from "./SearchBar";
+import { useState } from "react";
+import { MdOutlineExplore } from "react-icons/md";
+import Category from "./Category";
 
 const theme = createTheme({
   palette: {
@@ -23,13 +27,19 @@ const theme = createTheme({
 const Navbar = () => {
   const navigate = useNavigate();
 
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearch = (text) => {
+    setSearchText(text);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar
         position="static"
         style={{ margin: 0, borderBottom: "0.5px solid white" }}
       >
-        <Container maxWidth="x1">
+        <Container>
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="menu">
               <BsYinYang />
@@ -45,28 +55,39 @@ const Navbar = () => {
             >
               Edu Platform
             </Typography>
-            <InputBase
-              placeholder="Search..."
-              inputProps={{ "aria-label": "search" }}
-              sx={{ ml: 2, flex: 1 }}
-            />
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                margin: "10px",
+                width: "fit-content",
+                textAlign: "center",
+              }}
+            >
+              {searchText !== "" ? `Search result: ${searchText}` : ""}
+            </Typography>
+            <SearchBar onSearch={handleSearch} />
+            <Category />
 
-            <Button
+            <IconButton
               color="inherit"
               onClick={() => {
                 navigate("/course");
               }}
             >
-              Browse
-            </Button>
-            <Button
-              color="inherit"
-              onClick={() => {
-                navigate("/profile");
-              }}
-            >
-              My Account
-            </Button>
+              <MdOutlineExplore />
+            </IconButton>
+            <Link to={"/wishlist"} style={{ textDecoration: "none" }}>
+              <IconButton style={{ color: "white" }}>
+                <AiOutlineHeart />
+              </IconButton>
+            </Link>
+            <Link to={"/cart"} style={{ textDecoration: "none" }}>
+              <IconButton style={{ color: "white" }}>
+                <BsCart />
+              </IconButton>
+            </Link>
+            <DropdownMenu />
           </Toolbar>
         </Container>
       </AppBar>
