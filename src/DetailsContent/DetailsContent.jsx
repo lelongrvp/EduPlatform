@@ -9,11 +9,14 @@ import Description from './Description/Description';
 import Teacher from './Teacher/Teacher';
 import Rating from './Rating/Rating';
 import Payment from './Payment/Payment';
+import TeacherDetails from '../TeacherDetails/TeacherDetails';
+import { useState } from 'react';
 export default function DetailsContent({showFullDetails}) {
   const courses = {
     name : "AWS Cloud for beginner (Vietnamese)",
     namevi : "AWS Cloud cho người mới bắt đầu (Tiếng Việt)",
     teacher : {
+      id:1,
       name : "Linh Nguyen",
       link : "/teacher/id",
       avatar: "https://source.unsplash.com/random",
@@ -106,10 +109,13 @@ export default function DetailsContent({showFullDetails}) {
     ],
 
   }
+  const [showTeacherDetails, setShowTeacherDetails] = useState(false);
   return (
-    <>
+    <div className="details-content">
       <div>Here is nav bar an notification!</div>
       <Button size="small" onClick={()=>{showFullDetails(false)}}>Back</Button>
+      
+      {!showTeacherDetails?
       <div className='contents' style={{position:'relative'}}>
         <Sumary {...{courses}}/>
         <Payment {...{courses}}/>
@@ -119,10 +125,12 @@ export default function DetailsContent({showFullDetails}) {
           <Requirements {...{courses}}/>
           <Description {...{courses}}/>
           <Target {...{courses}}/>
-          <Teacher {...{courses}}/>
+          <Teacher {...{courses, setShowTeacherDetails}}/>
           <Rating {...{courses}}/>
         </div>
       </div>
-    </>
+      :<TeacherDetails {...{setShowTeacherDetails}}/>}
+      
+    </div>
   );
 }

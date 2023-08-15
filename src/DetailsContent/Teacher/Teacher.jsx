@@ -6,11 +6,13 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 import { MdStarRate, MdPlayCircle,MdSupervisorAccount, MdVerified } from "react-icons/md";
 
-function handleClick(event) { //note that function and link was not definde
-  event.preventDefault();
-  console.info('You clicked a breadcrumb.');
-}
-export default function Teacher({courses}) {
+
+export default function Teacher({courses, setShowTeacherDetails}) {
+  function handleClick(event) { //note that function and link was not definde
+    event.preventDefault();
+    setShowTeacherDetails(true);
+    console.info('You clicked a breadcrumb.');
+  }
   return (
     <div id="teacher">
       <Typography variant='h5' style={{fontWeight:"bold"}}>Giảng viên</Typography>
@@ -22,7 +24,9 @@ export default function Teacher({courses}) {
       <Box sx={{ flexGrow: 1 }} style={{padding:"10px"}}>
       <Grid container spacing={1} direction="row">
         <Grid xs={2}>
+        <Link underline="hover" key="1" color="inherit" href="/" onClick={handleClick} style={{marginLeft:10, color:"#c0c4fc", textDecoration:"underline"}}>
           <Avatar src={courses.teacher.avatar} sx={{ width: 100, height: 100 }}/>
+        </Link>
         </Grid>
         <Grid xs={10}>
           <div>
@@ -51,7 +55,6 @@ export default function Teacher({courses}) {
         return (<Typography variant='subtitle2' style={{marginLeft:20}} key={index}>- {c}</Typography>)
       })}
       <Typography variant='subtitle1'>{courses.teacher.ability}</Typography>        
-      
     </div>
   )
 }
