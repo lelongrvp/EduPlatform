@@ -1,16 +1,53 @@
 /* eslint-disable react/prop-types */
-import { Container, Typography } from "@mui/material";
+import { Button, ButtonGroup, Container, Typography } from "@mui/material";
 import CourseCard from "../components/CourseCard";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useState } from "react";
 
 const CoursePage = ({ course }) => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredCourse =
+    selectedCategory === "All"
+      ? course
+      : course.filter((course) => course.category === selectedCategory);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <>
       <Navbar />
       <Typography variant="h4" style={{ textAlign: "center", marginTop: 20 }}>
-        All Course
+        {selectedCategory}
       </Typography>
+      <ButtonGroup
+        variant="outlined"
+        color="primary"
+        aria-label="category selection"
+        sx={{
+          display: "flex",
+          margin: "10px",
+          justifyContent: "center",
+        }}
+      >
+        <Button onClick={() => handleCategoryChange("All")}>All</Button>
+        <Button onClick={() => handleCategoryChange("Front-end")}>
+          Front-end
+        </Button>
+        <Button onClick={() => handleCategoryChange("Back-end")}>
+          Back-end
+        </Button>
+        <Button onClick={() => handleCategoryChange("Video Game")}>
+          Video Game
+        </Button>
+        <Button onClick={() => handleCategoryChange("Database")}>
+          Database
+        </Button>
+        <Button onClick={() => handleCategoryChange("Mobile")}>Mobile</Button>
+      </ButtonGroup>
       <Container
         maxWidth="x1"
         sx={{ mt: 2 }}
@@ -21,7 +58,7 @@ const CoursePage = ({ course }) => {
           alignItems: "center",
         }}
       >
-        {course.map((course, idx) => (
+        {filteredCourse.map((course, idx) => (
           <CourseCard key={idx} course={course} />
         ))}
       </Container>

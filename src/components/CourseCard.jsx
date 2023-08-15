@@ -7,9 +7,11 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CourseCard = (props) => {
+  const navigate = useNavigate();
+
   return (
     <Card
       sx={{ maxWidth: 345 }}
@@ -17,11 +19,11 @@ const CourseCard = (props) => {
         margin: "20px",
         padding: 10,
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-        height: "350px",
+        height: "400px",
       }}
     >
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: "150px" }}
         image={props.course.image}
         alt={props.course.title}
       />
@@ -29,20 +31,20 @@ const CourseCard = (props) => {
         <Typography gutterBottom variant="h5" component="div">
           {props.course.title}
         </Typography>
+        <Typography variant="body1">
+          Category: {props.course.category}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
           {props.course.description}
         </Typography>
       </CardContent>
       <CardActions>
-        <Link
-          to={{
-            pathname: `/course/${props.course.id}`,
-            state: { courses: props.courseArray },
-          }}
-          style={{ textDecoration: "none" }}
+        <Button
+          size="small"
+          onClick={() => navigate(`/course/${props.course.id}`)}
         >
-          <Button size="small">View more</Button>
-        </Link>
+          View more
+        </Button>
       </CardActions>
     </Card>
   );

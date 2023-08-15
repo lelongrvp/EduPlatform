@@ -1,15 +1,17 @@
+/* eslint-disable react/prop-types */
 import {
   AppBar,
   Container,
   IconButton,
   ThemeProvider,
   Toolbar,
+  Tooltip,
   Typography,
   createTheme,
 } from "@mui/material";
 import { BsYinYang, BsCart } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
@@ -35,10 +37,7 @@ const Navbar = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar
-        position="static"
-        style={{ margin: 0, borderBottom: "0.5px solid white" }}
-      >
+      <AppBar position="static" sx={{ margin: 0 }}>
         <Container>
           <Toolbar>
             <IconButton edge="start" color="inherit" aria-label="menu">
@@ -68,25 +67,32 @@ const Navbar = () => {
             </Typography>
             <SearchBar onSearch={handleSearch} />
             <Category />
-
-            <IconButton
-              color="inherit"
-              onClick={() => {
-                navigate("/course");
-              }}
-            >
-              <MdOutlineExplore />
-            </IconButton>
-            <Link to={"/wishlist"} style={{ textDecoration: "none" }}>
-              <IconButton style={{ color: "white" }}>
+            <Tooltip title="Browse">
+              <IconButton
+                color="inherit"
+                onClick={() => {
+                  navigate("/course");
+                }}
+              >
+                <MdOutlineExplore />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Wishlist">
+              <IconButton
+                style={{ color: "white" }}
+                onClick={() => navigate("/wishlist")}
+              >
                 <AiOutlineHeart />
               </IconButton>
-            </Link>
-            <Link to={"/cart"} style={{ textDecoration: "none" }}>
-              <IconButton style={{ color: "white" }}>
+            </Tooltip>
+            <Tooltip title="Cart">
+              <IconButton
+                style={{ color: "white" }}
+                onClick={() => navigate("/cart")}
+              >
                 <BsCart />
               </IconButton>
-            </Link>
+            </Tooltip>
             <DropdownMenu />
           </Toolbar>
         </Container>

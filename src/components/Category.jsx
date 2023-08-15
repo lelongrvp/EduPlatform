@@ -1,21 +1,14 @@
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { MdOutlineCategory } from "react-icons/md";
 
 const Category = () => {
   const categories = [
-    "Web",
+    "Front-end",
+    "Back-end",
+    "Video Game",
+    "Database",
     "Mobile",
-    "Game",
-    "Data Science",
-    "Machine Learning",
-    "AI",
-    "Cloud Computing",
-    "Cyber Security",
-    "DevOps",
-    "Blockchain",
-    "IoT",
-    "Other",
   ];
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -29,28 +22,30 @@ const Category = () => {
 
   return (
     <div>
-      <IconButton
-        aria-controls="simple-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        style={{ color: "white" }}
-      >
-        <MdOutlineCategory />
-      </IconButton>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        sx={{ "& .MuiPaper-root": { backgroundColor: "#0f47ad" } }}
-      >
-        {categories.map((category, idx) => (
-          <MenuItem key={idx} onClick={handleClose} sx={{ color: "white" }}>
-            {category}
-          </MenuItem>
-        ))}
-      </Menu>
+      <Tooltip title="Category">
+        <IconButton
+          aria-controls="simple-menu"
+          aria-haspopup="true"
+          onClick={handleClick}
+          style={{ color: "white" }}
+        >
+          <MdOutlineCategory />
+        </IconButton>
+        <Menu
+          id="simple-menu"
+          anchorEl={anchorEl}
+          keepMounted
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
+          sx={{ "& .MuiPaper-root": { backgroundColor: "#0f47ad" } }}
+        >
+          {categories.map((category, idx) => (
+            <MenuItem key={idx} onClick={handleClose} sx={{ color: "white" }}>
+              {category}
+            </MenuItem>
+          ))}
+        </Menu>
+      </Tooltip>
     </div>
   );
 };

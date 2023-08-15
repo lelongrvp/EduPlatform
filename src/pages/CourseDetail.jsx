@@ -1,32 +1,33 @@
 /* eslint-disable react/prop-types */
-import { Container, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Navbar from "../components/Navbar";
-import { useLocation, useParams } from "react-router-dom";
+import Footer from "../components/Footer";
+import { useParams } from "react-router-dom";
 
-const CourseDetail = () => {
+const CourseDetail = ({ course }) => {
   const { id } = useParams();
-  const location = useLocation();
 
-  const courses = location.state.course;
-  const selectedCourse = courses.find((course) => course.id === parseInt(id));
+  const selectedCourse = course.find((course) => course.id.toString() === id);
+
+  if (!selectedCourse) {
+    return (
+      <div>
+        <Navbar />
+        <Typography variant="h3">Course not found</Typography>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
-    <>
+    <div>
       <Navbar />
-      <Container>
-        {selectedCourse ? (
-          <>
-            <Typography variant="h2">{selectedCourse.title}</Typography>
-            <Typography variant="body2">
-              {selectedCourse.description}
-            </Typography>
-          </>
-        ) : (
-          <Typography variant="h2">Course Not Found</Typography>
-        )}
-      </Container>
-    </>
+      <Typography variant="h5" component="div">
+        {selectedCourse.title}
+      </Typography>
+      <Typography variant="body2">{selectedCourse.description}</Typography>
+      <Footer />
+    </div>
   );
 };
-
 export default CourseDetail;
