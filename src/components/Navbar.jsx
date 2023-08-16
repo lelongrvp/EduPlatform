@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu";
 import SearchBar from "./SearchBar";
 import { MdOutlineExplore } from "react-icons/md";
-import Category from "./Category";
 
 const theme = createTheme({
   palette: {
@@ -29,7 +28,7 @@ const Navbar = ({ courseData }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static" sx={{ margin: 0 }}>
+      <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" color="inherit" aria-label="menu">
             <BsYinYang />
@@ -37,8 +36,11 @@ const Navbar = ({ courseData }) => {
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 2 }}
-            style={{ cursor: "pointer" }}
+            sx={{
+              maxWidth: "fit-content",
+              flexGrow: 2,
+              cursor: "pointer",
+            }}
             onClick={() => {
               navigate("/");
             }}
@@ -46,7 +48,6 @@ const Navbar = ({ courseData }) => {
             Edu Platform
           </Typography>
           <SearchBar courseData={courseData} />
-          <Category />
           <Tooltip title="Browse">
             <IconButton
               color="inherit"

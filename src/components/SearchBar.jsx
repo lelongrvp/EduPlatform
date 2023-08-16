@@ -8,6 +8,7 @@ import {
   IconButton,
   List,
   ListItemText,
+  Typography,
 } from "@mui/material";
 import { MdSearch } from "react-icons/md";
 import { Link } from "react-router-dom";
@@ -65,6 +66,9 @@ const SearchBar = ({ onSearch, courseData }) => {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
+        <Typography variant="body1" sx={{ p: "10px" }}>
+          You search for {searchText}:
+        </Typography>
         <List>
           {searchResults.map((result) => (
             <Link

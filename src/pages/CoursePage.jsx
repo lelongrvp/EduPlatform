@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Button, ButtonGroup, Container, Typography } from "@mui/material";
 import CourseCard from "../components/CourseCard";
-import Footer from "../components/Footer";
 import { useState } from "react";
 
 const CoursePage = ({ course }) => {
@@ -61,7 +60,6 @@ const CoursePage = ({ course }) => {
           <CourseCard key={idx} course={course} />
         ))}
       </Container>
-      <Footer />
     </>
   );
 };
