@@ -24,16 +24,28 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
     );
   }
   const defaultTheme = createTheme();
-const Login = ({checkHasAccount, checkIsLogin}) => {
-  const handleSubmit = (event) => {
+export default function Login ({checkHasAccount, checkIsLogin}) {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    //send http login request here
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    checkIsLogin(true)
+    await fetch('http://localhost:8080/api/user/login',{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        "username": data.get('userName'),
+        "password": data.get('password'),
+      }),
+  }).then(
+    res => {
+      if (!res.ok) {
+        window.alert("Username or password is not true!");
+    }else{
+      console.log(res.json());
+      checkIsLogin(true)
+    }
+    }).catch((err) => window.alert(err));
   };
 
   return (
@@ -75,10 +87,10 @@ const Login = ({checkHasAccount, checkIsLogin}) => {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="userName"
+                label="userName Address"
+                name="userName"
+                autoComplete="userName"
                 autoFocus
               />
               <TextField
@@ -123,4 +135,3 @@ const Login = ({checkHasAccount, checkIsLogin}) => {
     </ThemeProvider>
   );
 }
-export default Login
