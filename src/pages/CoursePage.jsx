@@ -2,7 +2,6 @@
 import { Button, ButtonGroup, Container, Typography } from "@mui/material";
 import CourseCard from "../components/CourseCard";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import { useState } from "react";
 
 const CoursePage = ({ course }) => {
@@ -19,7 +18,6 @@ const CoursePage = ({ course }) => {
 
   return (
     <>
-      <Navbar />
       <Typography variant="h4" style={{ textAlign: "center", marginTop: 20 }}>
         {selectedCategory}
       </Typography>
@@ -47,6 +45,7 @@ const CoursePage = ({ course }) => {
           Database
         </Button>
         <Button onClick={() => handleCategoryChange("Mobile")}>Mobile</Button>
+        <Button onClick={() => handleCategoryChange("DevOps")}>DevOps</Button>
       </ButtonGroup>
       <Container
         maxWidth="x1"

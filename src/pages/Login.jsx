@@ -6,14 +6,13 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { FaBeer } from "react-icons/fa";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Copyright = (props) => {
   return (
     <Typography
@@ -22,11 +21,7 @@ const Copyright = (props) => {
       align="center"
       {...props}
     >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        KITS
-      </Link>
-      {" 2023."}
+      {"Copyright © "} Edu Platform {new Date().getFullYear()}
     </Typography>
   );
 };
@@ -119,25 +114,17 @@ const Login = ({ checkHasAccount, checkIsLogin }) => {
                 sx={{ mt: 3, mb: 2 }}
                 onClick={() =>
                   //   checkIsLogin(true) ? navigate("/home") : navigate("/login")
-                  navigate("/home")
+                  navigate("/")
                 }
               >
                 Sign In
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
+                  <Link to="/reset">Forgot password?</Link>
                 </Grid>
                 <Grid item>
-                  <Link
-                    href="#"
-                    variant="body2"
-                    onClick={() => checkHasAccount(false)}
-                  >
-                    {"Don't have an account? Sign Up"}
-                  </Link>
+                  <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import CoursePage from "./pages/CoursePage";
 import Home from "./pages/Home";
@@ -8,8 +8,17 @@ import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import ResetPassword from "./pages/ResetPassword";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const App = () => {
+  const location = useLocation();
+
+  const hiddenRoutes = ["/login", "/signup", "/reset"];
+
+  const isHidden = hiddenRoutes.includes(location.pathname);
+
   const course = [
     {
       id: 1,
@@ -131,10 +140,21 @@ const App = () => {
         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Unreal_Engine_Logo_2020.svg/1200px-Unreal_Engine_Logo_2020.svg.png",
       price: 99.99,
     },
+    {
+      id: 13,
+      title: "DevOps A-Z",
+      category: "DevOps",
+      description:
+        "DevOps is a set of practices that combines software development and IT operations. It aims to shorten the systems development life cycle and provide continuous delivery with high software quality.",
+      image:
+        "https://eadn-wc03-4064062.nxedge.io/cdn/wp-content/uploads/2021/07/DevOps_Diagram-03.png",
+      price: 99.99,
+    },
   ];
 
   return (
     <>
+      {!isHidden && <Navbar courseData={course} />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home course={course} />} />
@@ -144,7 +164,9 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist course={course} />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/reset" element={<ResetPassword />} />
       </Routes>
+      {!isHidden && <Footer />}
     </>
   );
 };

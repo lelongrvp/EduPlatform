@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 import CourseCard from "../components/CourseCard";
 import Slider from "../components/Slider";
 import { Button, Container, Typography } from "@mui/material";
@@ -13,7 +11,6 @@ const Home = (props) => {
   };
   return (
     <div>
-      <Navbar />
       <Typography variant="h4" align="center" sx={{ mt: 2 }}>
         Welcome to Edu Platform
       </Typography>
@@ -51,7 +48,6 @@ const Home = (props) => {
           Show More
         </Button>
       )}
-      <Footer />
     </div>
   );
 };

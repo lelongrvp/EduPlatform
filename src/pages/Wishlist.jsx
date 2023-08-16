@@ -1,14 +1,11 @@
 /* eslint-disable react/prop-types */
 import { Container, Typography } from "@mui/material";
-import Navbar from "../components/Navbar";
 import CourseCard from "../components/CourseCard";
-import Footer from "../components/Footer";
 
 const Wishlist = ({ course }) => {
   return (
     //make the container full width
     <div className="container">
-      <Navbar />
       <Typography variant="h4" sx={{ textAlign: "center", mt: 5 }}>
         Wishlist
       </Typography>
@@ -26,7 +23,6 @@ const Wishlist = ({ course }) => {
           <CourseCard key={item.id} course={item} />
         ))}
       </Container>
-      <Footer />
     </div>
   );
 };
