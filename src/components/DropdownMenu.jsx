@@ -46,7 +46,9 @@ const DropdownMenu = () => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        sx={{ "& .MuiPaper-root": { backgroundColor: "#0f47ad" } }}
+        sx={{
+          "& .MuiPaper-root": { backgroundColor: "#0f47ad", borderRadius: 0 },
+        }}
       >
         <Link to={"/profile"} style={{ textDecoration: "none" }}>
           <MenuItem onClick={handleClose} sx={{ color: "white" }}>

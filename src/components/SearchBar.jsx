@@ -39,9 +39,11 @@ const SearchBar = ({ onSearch, courseData }) => {
 
   return (
     <Paper
+      square={true}
       component="form"
       sx={{
-        p: "2px 4px",
+        mr: 1,
+        p: "2px",
         display: "flex",
         alignItems: "center",
         position: "relative",
@@ -55,16 +57,20 @@ const SearchBar = ({ onSearch, courseData }) => {
       />
       <IconButton
         type="button"
-        sx={{ p: "10px" }}
+        sx={{ p: "10px", borderRadius: 0 }}
         aria-label="search"
         onClick={handleSearchIconClick}
       >
         <MdSearch />
       </IconButton>
       <Menu
+        square={true}
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
+        sx={{
+          "& .MuiPaper-root": { borderRadius: 0 },
+        }}
       >
         <Typography variant="body1" sx={{ p: "10px" }}>
           You search for {searchText}:

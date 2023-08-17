@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import {
   AppBar,
+  Box,
   IconButton,
   ThemeProvider,
   Toolbar,
@@ -29,52 +30,59 @@ const Navbar = ({ courseData }) => {
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <BsYinYang />
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              maxWidth: "fit-content",
-              flexGrow: 2,
-              cursor: "pointer",
-            }}
-            onClick={() => {
-              navigate("/");
-            }}
-          >
-            Edu Platform
-          </Typography>
-          <SearchBar courseData={courseData} />
-          <Tooltip title="Browse">
-            <IconButton
-              color="inherit"
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Box sx={{ display: "inline-flex", alignItems: "center" }}>
+            <IconButton edge="start" color="inherit" aria-label="menu">
+              <BsYinYang />
+            </IconButton>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                maxWidth: "fit-content",
+                flexGrow: 2,
+                cursor: "pointer",
+              }}
               onClick={() => {
-                navigate("/course");
+                navigate("/");
               }}
             >
-              <MdOutlineExplore />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Wishlist">
-            <IconButton
-              style={{ color: "white" }}
-              onClick={() => navigate("/wishlist")}
-            >
-              <AiOutlineHeart />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Cart">
-            <IconButton
-              style={{ color: "white" }}
-              onClick={() => navigate("/cart")}
-            >
-              <BsCart />
-            </IconButton>
-          </Tooltip>
-          <DropdownMenu />
+              Edu Platform
+            </Typography>
+          </Box>
+          <Box sx={{ display: "inline-flex", alignItems: "center" }}>
+            <SearchBar courseData={courseData} />
+            <Tooltip title="Browse">
+              <IconButton
+                color="inherit"
+                onClick={() => {
+                  navigate("/course");
+                }}
+                sx={{ height: "fit-content", borderRadius: 0 }}
+              >
+                <MdOutlineExplore />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Wishlist">
+              <IconButton
+                style={{ color: "white" }}
+                onClick={() => navigate("/wishlist")}
+                sx={{ height: "fit-content", borderRadius: 0 }}
+              >
+                <AiOutlineHeart />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Cart">
+              <IconButton
+                style={{ color: "white" }}
+                onClick={() => navigate("/cart")}
+                sx={{ height: "fit-content", borderRadius: 0 }}
+              >
+                <BsCart />
+              </IconButton>
+            </Tooltip>
+            <DropdownMenu />
+          </Box>
         </Toolbar>
       </AppBar>
     </ThemeProvider>

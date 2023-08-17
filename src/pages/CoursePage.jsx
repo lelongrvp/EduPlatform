@@ -6,6 +6,10 @@ import { useState } from "react";
 const CoursePage = ({ course }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
+  //declare a variable to store all the categories uniquely from props.course
+
+  const categories = [...new Set(course.map((course) => course.category))];
+
   const filteredCourse =
     selectedCategory === "All"
       ? course
@@ -30,21 +34,24 @@ const CoursePage = ({ course }) => {
           justifyContent: "center",
         }}
       >
-        <Button onClick={() => handleCategoryChange("All")}>All</Button>
-        <Button onClick={() => handleCategoryChange("Front-end")}>
-          Front-end
+        {/* if select all, display all the course, otherwise, filter the courses */}
+        <Button
+          onClick={() => handleCategoryChange("All")}
+          variant={selectedCategory === "All" ? "contained" : "outlined"}
+          sx={{ borderRadius: 0 }}
+        >
+          All
         </Button>
-        <Button onClick={() => handleCategoryChange("Back-end")}>
-          Back-end
-        </Button>
-        <Button onClick={() => handleCategoryChange("Video Game")}>
-          Video Game
-        </Button>
-        <Button onClick={() => handleCategoryChange("Database")}>
-          Database
-        </Button>
-        <Button onClick={() => handleCategoryChange("Mobile")}>Mobile</Button>
-        <Button onClick={() => handleCategoryChange("DevOps")}>DevOps</Button>
+        {categories.map((category, idx) => (
+          <Button
+            key={idx}
+            onClick={() => handleCategoryChange(category)}
+            variant={selectedCategory === category ? "contained" : "outlined"}
+            sx={{ borderRadius: 0 }}
+          >
+            {category}
+          </Button>
+        ))}
       </ButtonGroup>
       <Container
         maxWidth="x1"

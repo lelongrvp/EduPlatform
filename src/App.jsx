@@ -137,7 +137,7 @@ const App = () => {
       description:
         "Unreal Engine is a game engine developed by Epic Games. It is a suite of integrated tools for game developers to design and build games, simulations, and visualizations.",
       image:
-        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Unreal_Engine_Logo_2020.svg/1200px-Unreal_Engine_Logo_2020.svg.png",
+        "https://th.bing.com/th/id/R.7ee30c8175fe55c08a80f1bad1eb78ae?rik=B%2fDn56%2fnuoWP%2bA&pid=ImgRaw&r=0",
       price: 99.99,
     },
     {

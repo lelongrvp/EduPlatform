@@ -26,13 +26,15 @@ const Slider = () => {
 
   return (
     <Card
+      square={true}
       sx={{ margin: "2rem", boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px" }}
     >
       <CardMedia
         component="img"
-        height="400"
+        height="500"
         image={images[currentIndex]}
         alt={`Image ${currentIndex + 1}`}
+        style={{ objectFit: "fill" }}
       />
       <IconButton onClick={handlePrev} disabled={currentIndex === 0}>
         <MdOutlineArrowCircleLeft />

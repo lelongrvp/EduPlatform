@@ -14,16 +14,20 @@ const CourseCard = (props) => {
 
   return (
     <Card
-      sx={{ maxWidth: 345 }}
-      style={{
-        margin: "20px",
-        padding: 10,
+      square={true}
+      sx={{
+        m: "20px",
+        p: 1,
+        maxWidth: 300,
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+      }}
+      style={{
         height: "400px",
       }}
     >
       <CardMedia
-        sx={{ height: "150px" }}
+        component="img"
+        style={{ height: "150px", objectFit: "contain" }}
         image={props.course.image}
         alt={props.course.title}
       />

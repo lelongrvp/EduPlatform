@@ -11,7 +11,21 @@ const Home = (props) => {
   };
   return (
     <div>
-      <Typography variant="h4" align="center" sx={{ mt: 2 }}>
+      <Typography
+        variant="h4"
+        align="center"
+        sx={{
+          mt: 2,
+          ml: 3,
+          color: "#1a237e",
+          fontWeight: "bold",
+          textShadow: "2px 2px 4px rgba(0, 0, 0, 0.2)",
+          //handwriting font
+          fontFamily: "Dancing Script, cursive",
+          letterSpacing: "0.05em",
+          textAlign: "left",
+        }}
+      >
         Welcome to Edu Platform
       </Typography>
       <Slider />
@@ -30,7 +44,7 @@ const Home = (props) => {
               <CourseCard key={idx} course={course} />
             ))
           : props.course
-              .slice(0, 3)
+              .slice(0, 4)
               .map((course, idx) => <CourseCard key={idx} course={course} />)}
       </Container>
       {showMore ? (
