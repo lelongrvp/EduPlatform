@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import CoursePage from "./pages/CoursePage";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
@@ -11,11 +11,22 @@ import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Admin from "./pages/Admin/Admin";
+import Dashboard from "./pages/Admin/Content/Dashboard";
+import UserManagement from "./pages/Admin/Content/UserManagement";
+import CategoryManagement from "./pages/Admin/Content/CategoryManagement";
 
 const App = () => {
   const location = useLocation();
 
-  const hiddenRoutes = ["/login", "/signup", "/reset"];
+  const hiddenRoutes = [
+    "/login",
+    "/signup",
+    "/reset",
+    "/admin",
+    "/admin/manage-users",
+    "/admin/manage-categories",
+  ];
 
   const isHidden = hiddenRoutes.includes(location.pathname);
 
@@ -165,6 +176,11 @@ const App = () => {
         <Route path="/wishlist" element={<Wishlist course={course} />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/reset" element={<ResetPassword />} />
+        <Route path="/admin" element={<Admin />}>
+          <Route index element={<Dashboard />} />
+          <Route path="manage-users" element={<UserManagement />} />
+          <Route path="manage-categories" element={<CategoryManagement />} />
+        </Route>
       </Routes>
       {!isHidden && <Footer />}
     </>
