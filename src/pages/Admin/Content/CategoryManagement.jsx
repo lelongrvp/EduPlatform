@@ -37,10 +37,6 @@ const CategoryManagement = () => {
     // Create the new category and update the state
     setCategories([...categories, categoryName]);
   };
-  const handleEdit = (category) => {
-    setSelectedCategory(category);
-    setShowModal(true);
-  };
 
   const handleDelete = (category) => {
     const updatedCategories = categories.filter(
@@ -80,9 +76,6 @@ const CategoryManagement = () => {
             }}
           >
             <h5>Category:</h5> {category.categoryName}
-            <Button variant="primary" onClick={() => handleEdit(category)}>
-              Edit
-            </Button>
             <Button variant="danger" onClick={() => handleDelete(category)}>
               Delete
             </Button>

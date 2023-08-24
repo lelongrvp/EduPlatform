@@ -73,7 +73,10 @@ const UserManagement = () => {
               alignItems: "center",
             }}
           >
-            Email: {user.email}
+            <h5>Email:</h5> {user.email}
+            <h5>Full Name:</h5> {user.firstName + " " + user.lastName}
+            <h5>Phone Number:</h5> {user.phone}
+            <h5>Joined at:</h5> {user.createdDate}
             <Button variant="primary" onClick={() => handleEdit(user)}>
               Edit
             </Button>
@@ -94,10 +97,11 @@ const UserManagement = () => {
             <Form>
               <Form.Group controlId="email">
                 <Form.Label>Email</Form.Label>
+                <Form.Control type="email" defaultValue={selectedUser.email} />
+                <Form.Label>Full Name</Form.Label>
                 <Form.Control
                   type="email"
-                  defaultValue={selectedUser.email}
-                  readOnly
+                  defaultValue={selectedUser.firstName + selectedUser.lastName}
                 />
               </Form.Group>
               {/* Add more form fields based on the JSON structure and role */}
