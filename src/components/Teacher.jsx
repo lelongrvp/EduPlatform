@@ -11,7 +11,7 @@ import {
   MdVerified,
 } from "react-icons/md";
 
-const Teacher = ({ courses, setShowTeacherDetails }) => {
+const Teacher = ({ course, setShowTeacherDetails }) => {
   function handleClick(event) {
     //note that function and link was not definde
     event.preventDefault();
@@ -36,11 +36,11 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
         }}
       >
         <Typography variant="h6" style={{ fontWeight: "bold" }}>
-          {courses.teacher.name}
+          {course.teacher.name}
         </Typography>
       </Link>
 
-      <Typography variant="h6">{courses.teacher.role}</Typography>
+      <Typography variant="h6">{course.teacher.role}</Typography>
       <Box sx={{ flexGrow: 1 }} style={{ padding: "10px" }}>
         <Grid container spacing={1} direction="row">
           <Grid xs={2}>
@@ -57,7 +57,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
               }}
             >
               <Avatar
-                src={courses.teacher.avatar}
+                src={course.teacher.avatar}
                 sx={{ width: 100, height: 100 }}
               />
             </Link>
@@ -69,7 +69,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
                 variant="subtitle1"
                 style={{ display: "inline", marginLeft: 10 }}
               >
-                {courses.teacher.totalRateStar} xếp hạng giảng viên
+                {course.teacher.totalRateStar} xếp hạng giảng viên
               </Typography>
             </div>
             <div>
@@ -78,7 +78,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
                 variant="subtitle1"
                 style={{ display: "inline", marginLeft: 10 }}
               >
-                {courses.teacher.totalRate} đánh giá
+                {course.teacher.totalRate} đánh giá
               </Typography>
             </div>
             <div>
@@ -87,7 +87,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
                 variant="subtitle1"
                 style={{ display: "inline", marginLeft: 10 }}
               >
-                {courses.teacher.totalStudents} học viên
+                {course.teacher.totalStudents} học viên
               </Typography>
             </div>
             <div>
@@ -96,18 +96,18 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
                 variant="subtitle1"
                 style={{ display: "inline", marginLeft: 10 }}
               >
-                {courses.teacher.totalCourses} khóa học
+                {course.teacher.totalcourse} khóa học
               </Typography>
             </div>
           </Grid>
         </Grid>
       </Box>
-      <Typography variant="subtitle1">{courses.teacher.exp}</Typography>
+      <Typography variant="subtitle1">{course.teacher.exp}</Typography>
       <Typography variant="subtitle1">
-        Language: {courses.teacher.language.join(", ")}
+        Language: {course.teacher.language.join(", ")}
       </Typography>
       <Typography variant="subtitle1">Certificates:</Typography>
-      {courses.teacher.certificates.map((c, index) => {
+      {course.teacher.certificates.map((c, index) => {
         return (
           <Typography
             variant="subtitle2"
@@ -118,7 +118,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
           </Typography>
         );
       })}
-      <Typography variant="subtitle1">{courses.teacher.ability}</Typography>
+      <Typography variant="subtitle1">{course.teacher.ability}</Typography>
     </div>
   );
 };
