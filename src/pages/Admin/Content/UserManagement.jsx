@@ -1,53 +1,60 @@
+import { useEffect } from "react";
 import { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap"; // Import Bootstrap components
-import CreateUser from "./CreateUser";
+import { Modal, Button } from "react-bootstrap"; // Import Bootstrap components
 
 const UserManagement = () => {
-  const [users, setUsers] = useState([
-    {
-      email: "longeu100@gmail.com",
-      phone: null,
-      firstName: "Long",
-      lastName: "Hoang",
-      image: null,
-      bio: null,
-      link: null,
-      certificates: null,
-      experience: null,
-      userID: 2,
-      createdDate: "20-08-2023 17:43:45",
-      modifiedDate: "20-08-2023 17:43:45",
-    },
-    {
-      email: "longeu1@gmail.com",
-      phone: "0969307637",
-      image: null,
-      firstName: "Long",
-      lastName: "Hoang",
-      description: null,
-      userID: 3,
-      createdDate: "21-08-2023 06:37:31",
-      modifiedDate: "23-08-2023 01:40:15",
-    },
-  ]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [showModal, setShowModal] = useState(false);
+  const token = localStorage.getItem("token");
+  const [users, setUsers] = useState([]);
 
-  const handleEdit = (user) => {
-    setSelectedUser(user);
-    setShowModal(true);
+  const getUser = async () => {
+    await fetch("http://localhost:8080/api/admin/user/list", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          return (
+            <Modal>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  Error when getting data. Please try again
+                </Modal.Title>
+              </Modal.Header>
+            </Modal>
+          );
+        }
+      })
+      .then((data) => setUsers(data.results));
   };
 
-  const handleDelete = (user) => {
-    const updatedUsers = users.filter((u) => u.userID !== user.userID);
-    setUsers(updatedUsers);
-    setShowModal(false); // Close the modal if it's open
+  const handleDeleteUser = async (userID) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/admin/user/${userID}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.ok) {
+        setUsers(users.filter((user) => user.userID !== userID));
+      } else {
+        console.error("Failed to delete user");
+      }
+    } catch (error) {
+      console.error("An error occurred while deleting the user", error);
+    }
   };
 
-  const handleClose = () => {
-    setShowModal(false);
-    setSelectedUser(null);
-  };
+  useEffect(() => {
+    getUser();
+  });
 
   return (
     <div
@@ -60,61 +67,35 @@ const UserManagement = () => {
       }}
     >
       <h2>User Management</h2>
-      <CreateUser />
       <ul>
         {users.map((user) => (
           <li
             key={user.userID}
             style={{
-              width: "100vw",
+              width: "fit-content",
               display: "flex",
               gap: "20px",
               margin: "20px 0",
               alignItems: "center",
+              border: "1px solid black",
+              padding: "20px",
+              borderRadius: "10px",
             }}
           >
             <h5>Email:</h5> {user.email}
             <h5>Full Name:</h5> {user.firstName + " " + user.lastName}
             <h5>Phone Number:</h5> {user.phone}
             <h5>Joined at:</h5> {user.createdDate}
-            <Button variant="primary" onClick={() => handleEdit(user)}>
-              Edit
-            </Button>
-            <Button variant="danger" onClick={() => handleDelete(user)}>
+            <Button variant="primary">Edit</Button>
+            <Button
+              variant="danger"
+              onClick={() => handleDeleteUser(user.userID)}
+            >
               Delete
             </Button>
           </li>
         ))}
       </ul>
-
-      {/* View/Edit Modal */}
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{selectedUser ? selectedUser.email : ""}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedUser && (
-            <Form>
-              <Form.Group controlId="email">
-                <Form.Label>Email</Form.Label>
-                <Form.Control type="email" defaultValue={selectedUser.email} />
-                <Form.Label>Full Name</Form.Label>
-                <Form.Control
-                  type="email"
-                  defaultValue={selectedUser.firstName + selectedUser.lastName}
-                />
-              </Form.Group>
-              {/* Add more form fields based on the JSON structure and role */}
-            </Form>
-          )}
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary">Save</Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };

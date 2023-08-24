@@ -4,15 +4,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { FaBeer } from "react-icons/fa";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 const Copyright = (props) => {
   return (
     <Typography
@@ -25,19 +25,44 @@ const Copyright = (props) => {
     </Typography>
   );
 };
+
 const defaultTheme = createTheme();
-const Login = ({ checkHasAccount, checkIsLogin }) => {
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    //send http login request here
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    checkIsLogin(true);
+    await fetch("http://localhost:8080/api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.get("username"),
+        password: data.get("password"),
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          window.alert("Username or password is not true!");
+        }
+      })
+      .then((data) => {
+        if (data.role === "ROLE_ADMIN") {
+          navigate("/admin");
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("role", data.role);
+          localStorage.setItem("username", data.username);
+        } else {
+          window.alert("You are not admin!");
+        }
+      })
+      .catch((err) => window.alert(err));
   };
 
   return (
@@ -75,7 +100,7 @@ const Login = ({ checkHasAccount, checkIsLogin }) => {
               <FaBeer />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Admin Login
             </Typography>
             <Box
               component="form"
@@ -87,11 +112,13 @@ const Login = ({ checkHasAccount, checkIsLogin }) => {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
               <TextField
                 margin="normal"
@@ -102,31 +129,17 @@ const Login = ({ checkHasAccount, checkIsLogin }) => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
-                onClick={() =>
-                  //   checkIsLogin(true) ? navigate("/home") : navigate("/login")
-                  navigate("/")
-                }
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link to="/reset">Forgot password?</Link>
-                </Grid>
-                <Grid item>
-                  <Link to="/signup">{"Don't have an account? Sign Up"}</Link>
-                </Grid>
-              </Grid>
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>

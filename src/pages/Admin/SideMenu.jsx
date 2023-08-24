@@ -14,20 +14,15 @@ import {
   FaGem,
   FaGithub,
   FaUserFriends,
-  FaBars,
 } from "react-icons/fa";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const SideMenu = (props) => {
-  const [collapsed, setCollapsed] = useState(false);
-
   const { toggled, handleToggleSidebar } = props;
   return (
     <div>
       <ProSidebar
-        collapsed={collapsed}
         toggled={toggled}
         breakPoint="md"
         onToggle={handleToggleSidebar}
@@ -35,14 +30,10 @@ const SideMenu = (props) => {
         <SidebarHeader
           style={{
             display: "flex",
-            justifyContent: "space-evenly",
+            justifyContent: "center",
             alignItems: "center",
           }}
         >
-          <FaBars
-            onClick={() => setCollapsed(!collapsed)}
-            style={{ cursor: "pointer" }}
-          />
           <div
             style={{
               padding: "24px",
@@ -51,7 +42,6 @@ const SideMenu = (props) => {
               fontSize: 14,
               letterSpacing: "1px",
               overflow: "hidden",
-              textOverFlow: "ellipsis",
               whiteSpace: "nowrap",
             }}
           >

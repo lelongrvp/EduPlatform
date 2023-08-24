@@ -1,11 +1,76 @@
-import { Card } from "react-bootstrap";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { Card, Modal } from "react-bootstrap";
 import "./Dashboard.scss";
 import PieChart from "./PieChart";
+import { useEffect, useState } from "react";
 
 const Dashboard = () => {
-  const teacherCount = 10; // Replace with actual count
-  const studentCount = 50; // Replace with actual count
-  const courseCount = 20; // Replace with actual count
+  const token = localStorage.getItem("token");
+  const [users, setUsers] = useState(null);
+  const [courses, setCourses] = useState(null);
+
+  const getUser = async () => {
+    await fetch("http://localhost:8080/api/admin/user/list", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          //show a modal of error
+          return (
+            <Modal>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  Error when getting data. Please try again
+                </Modal.Title>
+              </Modal.Header>
+            </Modal>
+          );
+        }
+      })
+      .then((data) => setUsers(data.results));
+  };
+
+  const getCourse = async () => {
+    await fetch("http://localhost:8080/api/teacher/course/list", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          //show a modal of error
+          return (
+            <Modal>
+              <Modal.Header closeButton>
+                <Modal.Title>
+                  Error when getting data. Please try again
+                </Modal.Title>
+              </Modal.Header>
+            </Modal>
+          );
+        }
+      })
+      .then((data) => setCourses(data.results));
+  };
+
+  const teacherCount = users
+    ? users.filter((user) => user.role === "ROLE_TEACHER").length
+    : 0;
+  const studentCount = users
+    ? users.filter((user) => user.role === "ROLE_STUDENT").length
+    : 0;
+  const courseCount = courses ? courses.length : 0;
+
+  useEffect(() => {
+    getUser();
+    getCourse();
+  }, []);
 
   return (
     <div className="dashboard">

@@ -4,30 +4,21 @@ import { Button, Modal, Form } from "react-bootstrap";
 
 const CreateCategory = ({ onCategoryCreate }) => {
   const [showModal, setShowModal] = useState(false);
-  const [categoryName, setCategoryName] = useState("");
-
-  const handleOpenModal = () => {
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setCategoryName(""); // Clear the input field
-  };
+  const [categoryName, setCategoryName] = useState([]);
 
   const handleSaveCategory = () => {
     onCategoryCreate(categoryName); // Notify parent component about the new category
-    handleCloseModal();
+    setShowModal(false);
   };
 
   return (
     <div>
-      <Button variant="primary" onClick={handleOpenModal}>
+      <Button variant="primary" onClick={() => setShowModal(true)}>
         Create Category
       </Button>
 
       {/* Create Category Modal */}
-      <Modal show={showModal} onHide={handleCloseModal}>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Create Category</Modal.Title>
         </Modal.Header>
@@ -42,7 +33,7 @@ const CreateCategory = ({ onCategoryCreate }) => {
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
             Cancel
           </Button>
           <Button variant="primary" onClick={handleSaveCategory}>
