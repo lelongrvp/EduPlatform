@@ -19,7 +19,7 @@ import whitelogo from '/logo.png';
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#0f47ad",
+      main: "#1870cc",
     },
   },
 });

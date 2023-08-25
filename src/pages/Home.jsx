@@ -11,18 +11,34 @@ const Home = () => {
   const token = localStorage.getItem('token');
   const [showMore, setShowMore] = useState(false);
   const [courses, setCourse] = useState(null);
+  const role = localStorage.getItem('role');
   const getCourses = async () => {
-    fetch('http://localhost:8080/api/teacher/course/list',{
+    if(role=='ROLE_TEACHER')
+    {
+      fetch('http://localhost:8080/api/teacher/course/list',{
       headers: {
         'Authorization': 'Bearer ' + token,
       }
-    }).then( res => {
-      if(res.ok){
-        return res.json()
-      }else{
-        window.alert('Fail to connect to Course DB, please contact the administrator')
+      }).then( res => {
+        if(res.ok){
+          return res.json()
+        }else{
+          window.alert('Fail to connect to Course DB, please contact the administrator')
+        }
+      }).then(data => setCourse(data.results))
+    }else{
+      fetch('http://localhost:8080/api/student/course/list',{
+      headers: {
+        'Authorization': 'Bearer ' + token,
       }
-    }).then(data => setCourse(data.results))
+      }).then( res => {
+        if(res.ok){
+          return res.json()
+        }else{
+          window.alert('Fail to connect to Course DB, please contact the administrator')
+        }
+      }).then(data => setCourse(data.results))
+    }
   }
   useEffect(()=>{
    getCourses();

@@ -12,6 +12,7 @@ import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import Layout from "./components/Layout";
 import TeacherDetail from "./components/TeacherDetail";
+import EditProfile from "./pages/EditProfile";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -343,6 +344,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="course/:id" element={<CourseDetail />} />
           <Route path="course" element={<CoursePage course={course} />} />
           <Route path="teacher/:id" element={<TeacherDetail />}></Route>
+          <Route path="/edit-profile/" element={<EditProfile/>}></Route>
           <Route path="course/create" element={<CreateCourse />} />
           <Route path="profile" element={<Profile />} />
           <Route path="cart" element={<Cart />} />
