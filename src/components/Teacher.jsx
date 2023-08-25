@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import Link from "@mui/material/Link";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -10,13 +11,13 @@ import {
   MdSupervisorAccount,
   MdVerified,
 } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
-const Teacher = ({ courses, setShowTeacherDetails }) => {
+const Teacher = ({ course }) => {
+  const navigate = useNavigate();
   function handleClick(event) {
-    //note that function and link was not definde
     event.preventDefault();
-    setShowTeacherDetails(true);
-    console.info("You clicked a breadcrumb.");
+    navigate(`/teacher/${course.teacher.id}`);
   }
   return (
     <div id="teacher">
@@ -27,8 +28,6 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
         underline="hover"
         key="1"
         color="inherit"
-        href="/"
-        onClick={handleClick}
         style={{
           marginLeft: 10,
           color: "#c0c4fc",
@@ -36,11 +35,11 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
         }}
       >
         <Typography variant="h6" style={{ fontWeight: "bold" }}>
-          {courses.teacher.name}
+          {course.teacher.lastName + " " + course.teacher.firstName}
         </Typography>
       </Link>
 
-      <Typography variant="h6">{courses.teacher.role}</Typography>
+      <Typography variant="h6">Engineering Consultant, AWS Cloud Solution Architect</Typography>
       <Box sx={{ flexGrow: 1 }} style={{ padding: "10px" }}>
         <Grid container spacing={1} direction="row">
           <Grid xs={2}>
@@ -57,7 +56,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
               }}
             >
               <Avatar
-                src={courses.teacher.avatar}
+                src={course.teacher.image}
                 sx={{ width: 100, height: 100 }}
               />
             </Link>
@@ -69,7 +68,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
                 variant="subtitle1"
                 style={{ display: "inline", marginLeft: 10 }}
               >
-                {courses.teacher.totalRateStar} xếp hạng giảng viên
+                {Math.floor(Math.random() * 5)} xếp hạng giảng viên
               </Typography>
             </div>
             <div>
@@ -78,7 +77,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
                 variant="subtitle1"
                 style={{ display: "inline", marginLeft: 10 }}
               >
-                {courses.teacher.totalRate} đánh giá
+                {Math.floor(Math.random() * 500)} đánh giá
               </Typography>
             </div>
             <div>
@@ -87,7 +86,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
                 variant="subtitle1"
                 style={{ display: "inline", marginLeft: 10 }}
               >
-                {courses.teacher.totalStudents} học viên
+                {Math.floor(Math.random() * 500)} học viên
               </Typography>
             </div>
             <div>
@@ -96,18 +95,18 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
                 variant="subtitle1"
                 style={{ display: "inline", marginLeft: 10 }}
               >
-                {courses.teacher.totalCourses} khóa học
+                {Math.floor(Math.random() * 10)} khóa học
               </Typography>
             </div>
           </Grid>
         </Grid>
       </Box>
-      <Typography variant="subtitle1">{courses.teacher.exp}</Typography>
-      <Typography variant="subtitle1">
-        Language: {courses.teacher.language.join(", ")}
-      </Typography>
+      <Typography variant="subtitle1">{course.teacher.experience}</Typography>
+      {/* <Typography variant="subtitle1">
+        Language: {course.teacher.language.join(", ")}
+      </Typography> */}
       <Typography variant="subtitle1">Certificates:</Typography>
-      {courses.teacher.certificates.map((c, index) => {
+      {course.teacher.certificates && course.teacher.certificates.split(',').map((c, index) => {
         return (
           <Typography
             variant="subtitle2"
@@ -118,7 +117,7 @@ const Teacher = ({ courses, setShowTeacherDetails }) => {
           </Typography>
         );
       })}
-      <Typography variant="subtitle1">{courses.teacher.ability}</Typography>
+      <Typography variant="subtitle1">As a Cloud Solution Architect (SA), I can provide many solution for customer during system design, development and deployment. I also contribute to community by many activities like Youtube channel, on-demand private training course and now on Udemy. Nice to make friend with all of you.</Typography>
     </div>
   );
 };

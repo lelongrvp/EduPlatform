@@ -6,52 +6,54 @@ import {
   ThemeProvider,
   Toolbar,
   Tooltip,
-  Typography,
   createTheme,
 } from "@mui/material";
-import { BsYinYang, BsCart } from "react-icons/bs";
+import { BsCart } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu";
 import SearchBar from "./SearchBar";
 import { MdOutlineExplore } from "react-icons/md";
-
+import Logo from "./Logo";
+import whitelogo from '/logo.png';
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#0f47ad",
+      main: "#1870cc",
     },
   },
 });
+const getUserInfo = async () => {
+  localStorage.getItem('role') === 'ROLE_STUDENT' ?
+    fetch('http://localhost:8080/api/student/info', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      },
+    }
+    ).then(res => res.json()).then(data => localStorage.setItem('userlogin', JSON.stringify(data)))
+    : (localStorage.getItem('role') === 'ROLE_TEACHER' ? fetch('http://localhost:8080/api/teacher/info', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      },
+    }
+    ).then(res => res.json()).then(data => localStorage.setItem('userlogin', JSON.stringify(data))) : null)
 
+}
 const Navbar = ({ courseData }) => {
   const navigate = useNavigate();
+  getUserInfo();
 
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Box sx={{ display: "inline-flex", alignItems: "center" }}>
-            <IconButton edge="start" color="inherit" aria-label="menu">
-              <BsYinYang />
+            <IconButton edge="start" color="inherit" onClick={() => navigate("/home")} aria-label="menu" sx={{ border: 'none', borderRadius: '0' }}>
+              <Logo src={whitelogo} />
             </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                maxWidth: "fit-content",
-                flexGrow: 2,
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              Edu Platform
-            </Typography>
           </Box>
           <Box sx={{ display: "inline-flex", alignItems: "center" }}>
-            <SearchBar courseData={courseData} />
+            <SearchBar courseData={courseData} /> {/* not pass onSearch to SearchBar right now */}
             <Tooltip title="Browse">
               <IconButton
                 color="inherit"

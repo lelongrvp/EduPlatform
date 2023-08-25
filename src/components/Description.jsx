@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Unstable_Grid2";
-import { MdLens } from "react-icons/md";
+// import Box from "@mui/material/Box";
+// import Grid from "@mui/material/Unstable_Grid2";
+// import { MdLens } from "react-icons/md";
 
-const Description = ({ courses }) => {
+const Description = ({ course }) => {
   return (
     <div style={{ padding: "10px", margin: "20px 0" }}>
       <Typography variant="h5" style={{ fontWeight: "bold", padding: "10px" }}>
@@ -14,17 +14,17 @@ const Description = ({ courses }) => {
         variant="subtitle1"
         style={{ fontWeight: "bold", padding: "10px" }}
       >
-        {courses.description.hello}
+        {course.description}
       </Typography>
-      <Typography
+      {/* <Typography
         variant="subtitle1"
         style={{ fontWeight: "bold", padding: "0 10px" }}
       >
-        {courses.description.aboutTeacher}
+        {course.description.aboutTeacher}
       </Typography>
       <Box sx={{ flexGrow: 1 }} style={{ padding: "10px" }}>
         <Grid container spacing={1} direction="column">
-          {courses.teacher.bio.map((info, index) => {
+          {course.teacher.bio.map((info, index) => {
             return (
               <Grid xs={12} key={index}>
                 <Typography
@@ -39,11 +39,11 @@ const Description = ({ courses }) => {
         </Grid>
       </Box>
       <Typography variant="subtitle1" style={{ padding: "0 10px" }}>
-        {courses.teacher.subCertificates}
+        {course.teacher.subCertificates}
       </Typography>
       <Box sx={{ flexGrow: 1 }} style={{ padding: "10px" }}>
         <Grid container spacing={1} direction="column">
-          {courses.teacher.certificates.map((certificate, index) => {
+          {course.teacher.certificates.map((certificate, index) => {
             return (
               <Grid xs={12} key={index}>
                 <MdLens style={{ height: 8, margin: 2 }} />
@@ -62,11 +62,11 @@ const Description = ({ courses }) => {
         variant="subtitle1"
         style={{ fontWeight: "bold", padding: "0 10px" }}
       >
-        {courses.description.aboutCourse}
+        {course.description.aboutCourse}
       </Typography>
       <Box sx={{ flexGrow: 1 }} style={{ padding: "10px" }}>
         <Grid container spacing={1} direction="column">
-          {courses.description.targets.map((target, index) => {
+          {course.description.targets.map((target, index) => {
             return (
               <Grid xs={12} key={index}>
                 <Typography
@@ -81,11 +81,11 @@ const Description = ({ courses }) => {
         </Grid>
       </Box>
       <Typography variant="subtitle1" style={{ padding: "0 10px" }}>
-        {courses.description.aboutObjectives}
+        {course.description.aboutObjectives}
       </Typography>
       <Box sx={{ flexGrow: 1 }} style={{ padding: "10px" }}>
         <Grid container spacing={1} direction="column">
-          {courses.description.objectives.map((objective, index) => {
+          {course.description.objectives.map((objective, index) => {
             return (
               <Grid xs={12} key={index}>
                 <MdLens style={{ height: 8, margin: 2 }} />
@@ -104,11 +104,11 @@ const Description = ({ courses }) => {
         variant="subtitle1"
         style={{ fontWeight: "bold", padding: "0 10px" }}
       >
-        {courses.description.subObjectivesTitle}
+        {course.description.subObjectivesTitle}
       </Typography>
       <Box sx={{ flexGrow: 1 }} style={{ padding: "10px" }}>
         <Grid container spacing={1} direction="column">
-          {courses.description.subObjectives.map((subObjective, index) => {
+          {course.description.subObjectives.map((subObjective, index) => {
             return (
               <Grid xs={12} key={index}>
                 <Typography
@@ -126,11 +126,11 @@ const Description = ({ courses }) => {
         variant="subtitle1"
         style={{ fontWeight: "bold", padding: "0 10px" }}
       >
-        {courses.description.contactTeacher}
+        {course.description.contactTeacher}
       </Typography>
       <Typography variant="subtitle1" style={{ padding: "0 10px" }}>
-        {courses.teacher.contact}
-      </Typography>
+        {course.teacher.contact}
+      </Typography> */}
     </div>
   );
 };

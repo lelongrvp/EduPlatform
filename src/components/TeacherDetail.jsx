@@ -9,6 +9,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import { FaFacebook, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const teacher = {
   id: 1,
@@ -324,7 +325,8 @@ const courses = [
   },
 ];
 
-const TeacherDetail = ({ setShowTeacherDetails }) => {
+const TeacherDetail = () => {
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -439,7 +441,7 @@ const TeacherDetail = ({ setShowTeacherDetails }) => {
                     alt="course"
                     height="140"
                     image={course.thumbnail}
-                    onClick={() => setShowTeacherDetails(false)}
+                    onClick={() => navigate(`/course/${course.id}`)}
                     style={{ cursor: "poiter !important" }}
                   />
                   <CardContent>
@@ -454,14 +456,14 @@ const TeacherDetail = ({ setShowTeacherDetails }) => {
                     <Button
                       size="small"
                       style={{ cursor: "poiter" }}
-                      onClick={() => setShowTeacherDetails(false)}
+                      onClick={() => navigate(`/course/${course.id}`)}
                     >
                       Share
                     </Button>
                     <Button
                       size="small"
                       style={{ cursor: "poiter" }}
-                      onClick={() => setShowTeacherDetails(false)}
+                      onClick={() => navigate(`/course/${course.id}`)}
                     >
                       Learn More
                     </Button>

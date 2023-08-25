@@ -3,7 +3,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import { MdLens } from "react-icons/md";
-const Target = ({ courses }) => {
+const Target = ({ course }) => {
   return (
     <div style={{ padding: "10px", margin: "20px 0" }}>
       <Typography variant="h5" style={{ fontWeight: "bold", padding: "10px" }}>
@@ -11,7 +11,7 @@ const Target = ({ courses }) => {
       </Typography>
       <Box sx={{ flexGrow: 1 }} style={{ padding: "10px" }}>
         <Grid container spacing={2} direction="column">
-          {courses.targets.map((target, index) => {
+          {course.target && course.target.split(',').map((target, index) => {
             return (
               <Grid xs={12} key={index}>
                 <MdLens style={{ height: 10 }} />{" "}

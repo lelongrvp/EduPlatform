@@ -13,7 +13,7 @@ import {
 } from "react-icons/md";
 import { GrCertificate } from "react-icons/gr";
 
-const Payment = ({ courses }) => {
+const Payment = ({ course }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
     setScrollPosition(window.scrollY);
@@ -54,16 +54,14 @@ const Payment = ({ courses }) => {
         style={videoStyle}
         width="340"
         height="190"
-        src={courses.videos[0] + "?enablejsapi=1"}
+        src={"https://www.youtube.com/embed/a9__D53WsUs" + "?enablejsapi=1"}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
       ></iframe>
       <div style={paymentCardStyle}>
         <Typography variant="h4" style={{ fontWeight: "bold", padding: "5px" }}>
-          {(courses.price.slice(-3) === "vnd" ? "đ" : "$") +
-            " " +
-            courses.price.slice(0, -3)}
+          {course.price}
         </Typography>
         <Button
           variant="contained"

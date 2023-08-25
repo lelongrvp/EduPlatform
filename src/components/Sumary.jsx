@@ -4,14 +4,11 @@ import { MdInfo, MdLanguage } from "react-icons/md";
 import IntToStars from "./IntToStars";
 import "./Sumary.css";
 
-const Sumary = ({ courses }) => {
+const Sumary = ({ course }) => {
   return (
-    <div className="courses-sumary">
+    <div className="course-sumary">
       <Typography variant="h4" style={{ fontWeight: "bold", color: "inherit" }}>
-        {courses.name}
-      </Typography>
-      <Typography variant="h6" color="inherit">
-        {courses.namevi}
+        {course.name}
       </Typography>
       <Typography variant="subtitle1">
         <span
@@ -25,8 +22,8 @@ const Sumary = ({ courses }) => {
           Bestsellers
         </span>
         <span style={{ color: "#f69c08", margin: "0 10px" }}>
-          {courses.rate}
-          <IntToStars int={courses.rate} />
+          {3.6}
+          <IntToStars int={3.6} />
           <a
             href="#teacher"
             style={{
@@ -35,11 +32,11 @@ const Sumary = ({ courses }) => {
               textDecoration: "underline",
             }}
           >
-            ({courses.rateTime} rating)
+            ({Math.floor(Math.random() * 500)} rating)
           </a>
           <span style={{ color: "white" }}>
             {" "}
-            {courses.totalStudent} students
+            {Math.floor(Math.random() * 500)} students
           </span>
         </span>
       </Typography>
@@ -53,17 +50,17 @@ const Sumary = ({ courses }) => {
             textDecoration: "underline",
           }}
         >
-          {courses.teacher.name}
+          {course.teacher.lastName + " " + course.teacher.firstName}
         </a>
       </Typography>
       <Typography variant="subtitle1" color="inherit">
         <span style={{ marginRight: 20 }}>
           <MdInfo />
-          Most recent update: {courses.updateAt}
+          Most recent update: {course.modifiedDate}
         </span>
         <span>
           <MdLanguage />
-          {courses.language}
+          Tiếng Việt
         </span>
       </Typography>
     </div>

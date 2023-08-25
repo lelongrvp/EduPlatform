@@ -4,7 +4,7 @@ import Avatar from "@mui/material/Avatar";
 import { MdStarRate } from "react-icons/md";
 import IntToStars from "./IntToStars";
 
-const Rating = ({ courses }) => {
+const Rating = () => {
   const rated = [
     {
       user: {
@@ -60,7 +60,7 @@ const Rating = ({ courses }) => {
           variant="h5"
           style={{ marginLeft: "10px", fontWeight: "bold", display: "inline" }}
         >
-          {courses.rate} course rating - {courses.rateTime} ratings
+          {Math.floor(Math.random() * 5)} course rating - {Math.floor(Math.random() * 50)} ratings
         </Typography>
       </div>
       <div

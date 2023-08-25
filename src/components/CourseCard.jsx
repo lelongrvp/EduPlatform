@@ -11,14 +11,13 @@ import { useNavigate } from "react-router-dom";
 
 const CourseCard = (props) => {
   const navigate = useNavigate();
-
+  const role = localStorage.getItem('role');
   return (
     <Card
       square={true}
       sx={{
         m: "20px",
         p: 1,
-        maxWidth: 300,
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
       }}
       style={{
@@ -29,17 +28,17 @@ const CourseCard = (props) => {
         component="img"
         style={{ height: "150px", objectFit: "contain" }}
         image={props.course.image}
-        alt={props.course.title}
+        alt={props.course.name}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {props.course.title}
+          {props.course.name.length > 50 ? `${props.course.name.slice(0,50)} ...`:props.course.name}
         </Typography>
         <Typography variant="body1">
-          Category: {props.course.category}
+          Category: {props.course.category.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {props.course.description}
+          {props.course.description.length >100 ? `${props.course.description.slice(0,100)} ...`:props.course.description}
         </Typography>
       </CardContent>
       <CardActions>
@@ -47,8 +46,17 @@ const CourseCard = (props) => {
           size="small"
           onClick={() => navigate(`/course/${props.course.id}`)}
         >
-          View more
+          View
         </Button>
+        {
+          role == 'ROLE_TEACHER' && 
+          <Button
+          size="small"
+          onClick={() => navigate(`/course/${props.course.id}`)}
+          >
+            Edit
+          </Button>
+        }
       </CardActions>
     </Card>
   );

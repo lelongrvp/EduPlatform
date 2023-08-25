@@ -1,11 +1,48 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CourseCard from "../components/CourseCard";
 import Slider from "../components/Slider";
+import Grid from '@mui/material/Unstable_Grid2';
+import Box from '@mui/material/Box';
+
 import { Button, Container, Typography } from "@mui/material";
 
-const Home = (props) => {
+const Home = () => {
+  const token = localStorage.getItem('token');
   const [showMore, setShowMore] = useState(false);
+  const [courses, setCourse] = useState(null);
+  const role = localStorage.getItem('role');
+  const getCourses = async () => {
+    if(role=='ROLE_TEACHER')
+    {
+      fetch('http://localhost:8080/api/teacher/course/list',{
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+      }).then( res => {
+        if(res.ok){
+          return res.json()
+        }else{
+          window.alert('Fail to connect to Course DB, please contact the administrator')
+        }
+      }).then(data => setCourse(data.results))
+    }else{
+      fetch('http://localhost:8080/api/student/course/list',{
+      headers: {
+        'Authorization': 'Bearer ' + token,
+      }
+      }).then( res => {
+        if(res.ok){
+          return res.json()
+        }else{
+          window.alert('Fail to connect to Course DB, please contact the administrator')
+        }
+      }).then(data => setCourse(data.results))
+    }
+  }
+  useEffect(()=>{
+   getCourses();
+  });
   const handleShowMore = () => {
     setShowMore(!showMore);
   };
@@ -29,7 +66,7 @@ const Home = (props) => {
         Welcome to Edu Platform
       </Typography>
       <Slider />
-      <Container
+      {courses && <Container
         maxWidth="x1"
         sx={{ mt: 2 }}
         style={{
@@ -39,14 +76,31 @@ const Home = (props) => {
           alignItems: "center",
         }}
       >
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container spacing={2}>
         {showMore
-          ? props.course.map((course, idx) => (
-              <CourseCard key={idx} course={course} />
-            ))
-          : props.course
+          ? courses.map((course, index)=>{
+            return (
+              <Grid item key={index} xs={4}>
+                <CourseCard course={course}/>
+              </Grid>
+            )
+          })
+
+          : courses
               .slice(0, 4)
-              .map((course, idx) => <CourseCard key={idx} course={course} />)}
-      </Container>
+              .map((course, index) =>{
+                return (
+                  <Grid item key={index} xs={4}>
+                    <CourseCard course={course}/>
+                  </Grid>
+                )
+              }
+              )}
+            </Grid>
+        </Box>
+      </Container>}
+
       {showMore ? (
         <Button
           onClick={handleShowMore}

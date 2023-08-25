@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LogoutDialog from "./LogoutDialog";
 
-const DropdownMenu = () => {
+export default function DropdownMenu () {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
 
@@ -16,10 +17,11 @@ const DropdownMenu = () => {
   };
 
   const handleLogout = () => {
-    // Perform any logout logic (e.g., clearing authentication state, etc.)
-
-    // Navigate to the login page
-    navigate("/login");
+    localStorage.removeItem('token');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    handleClosing();
+    navigate("/");
   };
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -30,6 +32,9 @@ const DropdownMenu = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleCreate = () => {
+    navigate("/course/create");
+  }
 
   return (
     <div>
@@ -61,6 +66,10 @@ const DropdownMenu = () => {
         <MenuItem onClick={handleOpen} sx={{ color: "white" }}>
           Logout
         </MenuItem>
+        {localStorage.getItem('role') == 'ROLE_TEACHER' &&
+        <MenuItem onClick={handleCreate} sx={{ color: "white" }}>
+          Create
+        </MenuItem>}
       </Menu>
       <LogoutDialog
         open={open}
@@ -69,6 +78,4 @@ const DropdownMenu = () => {
       />
     </div>
   );
-};
-
-export default DropdownMenu;
+}
