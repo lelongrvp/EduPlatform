@@ -64,7 +64,7 @@ const CategoryManagement = () => {
               alignItems: "center",
             }}
           >
-            <h5>Category:</h5> {category.categoryName}
+            <h5>Category:</h5> {category.name}
             <Button variant="danger" onClick={() => handleDelete(category)}>
               Delete
             </Button>
