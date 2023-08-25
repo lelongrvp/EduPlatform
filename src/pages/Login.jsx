@@ -13,6 +13,7 @@ import { FaBeer } from "react-icons/fa";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 const Copyright = (props) => {
   return (
     <Typography
@@ -26,18 +27,45 @@ const Copyright = (props) => {
   );
 };
 const defaultTheme = createTheme();
-const Login = ({ checkHasAccount, checkIsLogin }) => {
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    //send http login request here
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-    checkIsLogin(true);
+    await fetch("http://localhost:8080/api/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: data.get("username"),
+        password: data.get("password"),
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else {
+          window.alert("Username or password is not true!");
+        }
+      })
+      .then((data) => {
+        if (data.role === "ROLE_ADMIN") {
+          navigate("/admin");
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("role", data.role);
+          localStorage.setItem("username", data.username);
+        } else {
+          navigate("/");
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("role", data.role);
+          localStorage.setItem("username", data.username);
+        }
+      })
+      .catch((err) => window.alert(err));
   };
 
   return (
